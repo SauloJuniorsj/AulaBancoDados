@@ -17,6 +17,13 @@ public class Usuario {
     private String usu_email;
     private String usu_cargo;
 
+    public Usuario(int i, String nome, String mail, String cargo){
+        this.usu_nome = nome;
+        this.usu_email = mail;
+        this.usu_cargo = cargo;
+        this.usu_id = i;
+    }
+    
     public int getUsu_id() {
         return usu_id;
     }
@@ -48,5 +55,9 @@ public class Usuario {
     public void setUsu_cargo(String usu_cargo) {
         this.usu_cargo = usu_cargo;
     }
-   
+    
+    @Override
+    public String toString(){
+        return "Nome: " + this.usu_nome + " | Email: " + this.usu_email + " | cargo: " + this.usu_cargo;
+    }
 }

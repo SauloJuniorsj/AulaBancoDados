@@ -11,11 +11,19 @@ package com.github.saulojr.aulabancodados;
  */
 public class Tarefa {
 
-private int tarefa_id;
-private char tarefa_status;
-private Usuario tarefa_usuario;
-private String tarefa_titulo;
-private String tarefa_descricao;
+    private int tarefa_id;
+    private char tarefa_status;
+    private Usuario tarefa_usuario;
+    private String tarefa_titulo;
+    private String tarefa_descricao;
+
+    public Tarefa(int i, String titulo, String descri, Usuario usu) {
+        this.tarefa_id = i;
+        this.tarefa_status = 'N';
+        this.tarefa_usuario = usu;
+        this.tarefa_titulo = titulo;
+        this.tarefa_descricao = descri;
+    }
 
     public int getTarefa_id() {
         return tarefa_id;
@@ -57,5 +65,8 @@ private String tarefa_descricao;
         this.tarefa_descricao = tarefa_descricao;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Titulo " + this.tarefa_titulo + " Descricao " + this.tarefa_descricao + " | Usuario " + this.tarefa_usuario.toString();
+    }
 }
