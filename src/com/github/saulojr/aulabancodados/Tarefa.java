@@ -19,7 +19,7 @@ public class Tarefa {
 
     public Tarefa(int i, String titulo, String descri, Usuario usu) {
         this.tarefa_id = i;
-        this.tarefa_status = 'N';
+        this.tarefa_status = 'I';
         this.tarefa_usuario = usu;
         this.tarefa_titulo = titulo;
         this.tarefa_descricao = descri;
@@ -67,6 +67,6 @@ public class Tarefa {
 
     @Override
     public String toString() {
-        return "Titulo " + this.tarefa_titulo + " Descricao " + this.tarefa_descricao + " | Usuario " + this.tarefa_usuario.toString();
+        return "Titulo : " + this.tarefa_titulo + " Descricao : " + this.tarefa_descricao + " | Usuario " + this.tarefa_usuario.toString() + " | Status " + this.tarefa_status;
     }
 }

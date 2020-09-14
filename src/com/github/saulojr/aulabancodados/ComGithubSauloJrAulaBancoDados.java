@@ -24,7 +24,9 @@ public class ComGithubSauloJrAulaBancoDados {
 
         Scanner input = new Scanner(System.in);
         BufferedReader input2 = new BufferedReader(new InputStreamReader(System.in));
-        int i, u = 1, t, contU = 0, contT = 0;
+        int i, u, t, contU = 0, contT = 0;
+        boolean existe = false;
+        String titulo, descri;
         LinkedList<Usuario> usuarios = new LinkedList<>();
         LinkedList<Tarefa> tarefas = new LinkedList<>();
         do {
@@ -58,7 +60,7 @@ public class ComGithubSauloJrAulaBancoDados {
                             case 2:
                                 System.out.println("Insira o nome de quem gostaria de editar");
                                 for (Usuario cada : usuarios) {
-                                    if (cada.getUsu_nome().equals(input.next())) {
+                                    if (cada.getUsu_nome().equals(input2.readLine())) {
                                         System.out.println("Insira seu nome, email, e cargo, respectivamente para alterar " + cada.getUsu_nome());
                                         nome = input2.readLine();
                                         email = input.next();
@@ -75,8 +77,8 @@ public class ComGithubSauloJrAulaBancoDados {
                                 break;
                             case 4:
                                 System.out.println("Insira o nome do usuario a ser deletado");
-                                String excluir = input.next();
-                                boolean existe = false;
+                                String excluir = input2.readLine();
+                                existe = false;
                                 for (Usuario cada : usuarios) {
                                     if (cada.getUsu_nome().equals(excluir)) {
                                         System.out.println("Usuario com " + usuarios.remove(cada.getUsu_id()) + " foi REMOVIDO");
@@ -106,7 +108,7 @@ public class ComGithubSauloJrAulaBancoDados {
                             System.out.println("[1] - Inserir Tarefa");
                             System.out.println("[2] - Editar Tarefa");
                             System.out.println("[3] - Listar Tarefas");
-                            System.out.println("[4] - Concluir Tarefa");
+                            System.out.println("[4] - Alterar Status Tarefa");
                             System.out.println("[5] - Excluir Tarefa");
                             System.out.println("[0] - Voltar para tele inicial");
 
@@ -118,12 +120,11 @@ public class ComGithubSauloJrAulaBancoDados {
                                         System.out.println(cada.toString());
                                     }
                                     System.out.println("Insira o nome do usuario que deseja relacionar!");
-                                    String usu = input.next();
-                                    boolean existe = false;
+                                    String usu = input2.readLine();
+                                    existe = false;
                                     for (Usuario cada : usuarios) {
                                         if (cada.getUsu_nome().equals(usu)) {
 
-                                            String titulo, descri;
                                             System.out.println("Usuario encontrado!\nSegundo, insira o titulo e descricao da tarefa!");
                                             titulo = input2.readLine();
                                             descri = input2.readLine();
@@ -139,6 +140,32 @@ public class ComGithubSauloJrAulaBancoDados {
                                     }
                                     break;
                                 case 2:
+                                    for (Tarefa tare : tarefas) {
+                                        System.out.println(tare.toString());
+                                    }
+                                    System.out.println("Insira o titulo da tarefa que gostaria de editar");
+                                    for (Tarefa tarefa : tarefas) {
+                                        if (tarefa.getTarefa_titulo().equals(input2.readLine())) {
+                                            for (Usuario cada : usuarios) {
+                                                System.out.println(cada.toString());
+                                            }
+                                            System.out.println("Insira o nome do usuario que deseja relacionar!");
+                                            usu = input2.readLine();
+                                            for (Usuario cada : usuarios) {
+                                                if (cada.getUsu_nome().equals(usu)) {
+
+                                                    System.out.println("Usuario encontrado!\nInsira o titulo e descricao da tarefa a ser editada!");
+                                                    titulo = input2.readLine();
+                                                    descri = input2.readLine();
+                                                    tarefas.set(tarefa.getTarefa_id(), new Tarefa(contT++, titulo, descri, cada));
+                                                    System.out.println(tarefas.getLast());
+                                                    break;
+                                                }
+                                            }
+                                        } else {
+                                            System.out.println("Tarefa não encontrada!");
+                                        }
+                                    }
                                     break;
                                 case 3:
                                     for (Tarefa tarefa : tarefas) {
@@ -146,8 +173,35 @@ public class ComGithubSauloJrAulaBancoDados {
                                     }
                                     break;
                                 case 4:
+                                    for (Tarefa tarefa : tarefas) {
+                                        System.out.println(tarefa.toString());
+                                    }
+                                    System.out.println("Digite o titulo da tarefa que gostaria de alterar status");
+                                    titulo = "";
+                                    titulo = input2.readLine();
+                                    for (Tarefa tarefa : tarefas) {
+                                        if (tarefa.getTarefa_titulo().equals(titulo)) {
+                                            tarefa.setTarefa_status((tarefa.getTarefa_status() == 'C') ? 'I' : (tarefa.getTarefa_status() == 'I') ? 'C' : 'I');
+                                            System.out.println("Seu novo Status: " + tarefa.toString());
+                                        } else {
+                                            System.out.println("Tarefa nao encontrada !");
+                                        }
+                                    }
                                     break;
                                 case 5:
+                                    System.out.println("Insira o titulo da tarefa a ser excluida");
+                                    titulo = input2.readLine();
+                                    existe = false;
+                                    for (Tarefa tarefa : tarefas) {
+                                        if (tarefa.getTarefa_titulo().equals(titulo)) {
+                                            System.out.println("A tarefa " + tarefas.remove(tarefa.getTarefa_id()) + " foi removida ");
+                                        } else {
+                                            existe = true;
+                                        }
+                                        if (existe) {
+                                            System.out.println("Tarefa nao encontrada!");
+                                        }
+                                    }
                                     break;
                                 case 0:
                                     break;
